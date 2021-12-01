@@ -91,7 +91,7 @@
 
   function toggleClock() {
     if (!isClockOn) {
-      timingFunction = setInterval(countDown, 1);
+      timingFunction = setInterval(countDown, 1000);
     } else {
       clearInterval(timingFunction);
     }
