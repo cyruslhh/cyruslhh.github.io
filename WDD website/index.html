@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Personal Study Corner</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Lobster&family=Ubuntu:wght@300;400&display=swap" rel="stylesheet"> 
+</head>
+
+<body class="margin-zero" style="height: 100%;" id="body">
+    <div class="board margin-zero" id="board">
+      <div class="sticky-area" id="stickyArea" style="z-index: 1000">
+        <h1 class="main-title">Personal Study Corner</h1>
+        <h1 class="sub-title">Write down your tasks. <br>
+          Work on them, and take breaks. <br>
+          When you finish, throw it away!</h1>
+        <div style="background-image: url(assets/images/sticky.png);" class="sticky-note hidden" id="sticky">
+          <div class="sticky-note-inner">
+              <p contenteditable="true">
+                Write your task here!
+              </p>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="ledge margin-zero">
+        <img src="assets/images/stickies.png" class="sticky" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="createSticky(this)" draggable=false>
+        <img src="assets/images/clock-glow.png" class="clock clock-glow hidden" id='clockGlow'>
+        <img src="assets/images/clock-work.png" class="clock" onmouseover="showGlow('clockGlow')" onmouseout="hideGlow('clockGlow')" onclick="show('clockCloseup')" id="min-clock-close" draggable=false>
+        <h3 class="clock-text clock-text-minimized" id="minClock">25:00</h3  draggable=false>
+        <img src="assets/images/trash-glow.png" class="trash-glow hidden" id="trashglow">
+        <img src="assets/images/trash-b.png" class="trash" id="trashcan"  draggable=false>
+        <div class="crumple-area" id="crumpleArea">
+          <img src="assets/images/crumple-1.png" class="crumple hidden" id="crumple1">
+          <img src="assets/images/crumple-2.png" class="crumple hidden" id="crumple2">
+          <img src="assets/images/crumple-3.png" class="crumple hidden" id="crumple3">
+        </div>
+        <img src="assets/images/trash-f.png" class="trash"  draggable=false>
+    </div>
+    <div class="clock-background hidden-below" id="clockCloseup">
+      <div class="black-background"></div>
+      <img src="assets/images/close.png" class="close" id="close" onclick="hide('clockCloseup')">
+      <img src="assets/images/max-clock-glow.png" class="clock-closeup closeup-glow" id='closeupGlow'>
+      <img src="assets/images/clock-closeup-work.png" class="clock-closeup" id="clock-close" onmouseover="showGlow('closeupGlow')" onmouseout="hideGlow('closeupGlow')" onmousedown="hideGlow('closeupGlow');" onmouseup="showGlow('closeupGlow')" onclick="toggleClock(this)">
+      <h3 class="clock-text" id="maxClock">25:00</h3>
+      <div style="background-image: url(assets/images/pill-left.png);" class="pill-container" id="pillLeft">
+        <h4>work</h4>
+        <div class="pill-inner" style="margin-top: 1vh; margin-bottom: 4vh;">
+          <input type="number" class="left-input text-align-right" max=60 min=0 value=25 id="setWorkMinute" onchange="setNewTiming()"></input>
+          <h4>:</h4>
+          <input type="number" class="left-input text-align-left" style="margin-left: 1.2vh" id="setWorkSecond" max=60 min=0 value=00 onchange="setNewTiming()"></input>
+        </div>
+      </div>
+      <div style="background-image: url(assets/images/pill-right.png);" class="pill-container" id="pillRight">
+        <h4>rest</h4>
+        <div class="pill-inner" style="margin-top: 1vh; margin-bottom: 4vh;">
+          <input type="number" class="right-input text-align-right" max=60 min=0 value=05 id="setRestMinute"onchange="setNewTiming()"></input>
+          <h4>:</h4>
+          <input type="number" class="right-input text-align-left" style="margin-left: 1.2vh" id="setRestSecond" max=60 min=0 value=00 onchange="setNewTiming()"></input>
+        </div>
+      </div>
+      <img src="assets/images/line.png" id="centerLine">
+    </div>
+</body>
+
+
+<script>
+  let workMinutes = 25;
+  let workSeconds = 0;
+  let restMinutes = 5;
+  let restSeconds = 0;
+
+  let currentMinutes = workMinutes;
+  let currentSeconds = workSeconds;
+  let isWork = true;
+  let isClockOn = false;
+  let timingFunction = null;
+
+  let minimizedClock = document.getElementById("minClock");
+  let maxClockImage = document.getElementById("clock-close")
+  let minClockImage = document.getElementById("min-clock-close")
+  let maxClock = document.getElementById("maxClock");
+  let maximizedBackground = document.getElementById("clockCloseup")
+  let workMinuteInput = document.getElementById("setWorkMinute")
+  let workSecondInput = document.getElementById("setWorkSecond")
+  let restMinuteInput = document.getElementById("setRestMinute")
+  let restSecondInput = document.getElementById("setRestSecond")
+
+  function toggleClock() {
+    if (!isClockOn) {
+      timingFunction = setInterval(countDown, 1000);
+    } else {
+      clearInterval(timingFunction);
+    }
+    isClockOn = !isClockOn;
+  }
+
+  function countDown() {
+    if (currentSeconds == 0) {
+      if (currentMinutes == 0) {
+        sessionFinished();
+        return;
+      }
+      currentSeconds = 60;
+      currentMinutes -= 1;
+    }
+    currentSeconds -= 1;
+    updateClock(currentMinutes, currentSeconds);
+  }
+
+  function padNumber(number, len) {
+    number = number.toString();
+    if (len - number.length > 0) {
+      return ("0".repeat(len - number.length)).concat(number)
+    }
+    return number
+  }
+
+  function updateClock(minutes, seconds) {
+    minimizedClock.innerHTML = padNumber(minutes, 2) + ":" + padNumber(seconds, 2);
+    maxClock.innerHTML = padNumber(minutes, 2) + ":" + padNumber(seconds, 2);
+  }
+
+  function sessionFinished() {
+    clearInterval(timingFunction)
+    if (isWork) {
+      alert("Your work session finished! Take a break!")
+      maxClockImage.setAttribute('src', 'assets/images/clock-closeup-rest.png')
+      minClockImage.setAttribute('src', 'assets/images/clock-rest.png')
+      maximizedBackground.style.outlineColor = "#03CEA4"
+      currentMinutes = restMinutes;
+      currentSeconds = restSeconds;
+    } else {
+      alert("Your break finished! Stay productive and keep working!")
+      maxClockImage.setAttribute('src', 'assets/images/clock-closeup-work.png')
+      minClockImage.setAttribute('src', 'assets/images/clock-work.png')
+      maximizedBackground.style.outlineColor = "#529DC4"
+      currentMinutes = workMinutes;
+      currentSeconds = workSeconds;
+    }
+    updateClock(currentMinutes, currentSeconds)
+    isClockOn = false;
+    isWork = !isWork;
+  }
+
+  function clampValue(value, min, max) {
+    if (value > max) {
+      return max
+    }
+    if (value < min) {
+      return min
+    }
+    return value
+  }
+
+  function setNewTiming() {
+    shouldUpdate = false;
+    if (isWork && currentMinutes == workMinutes && currentSeconds == workSeconds) {
+      shouldUpdate = true;
+    } else if (!isWork && currentMinutes == restMinutes && currentSeconds == restSeconds) {
+      shouldUpdate = true;
+    }
+    workMinuteInput.value = padNumber(clampValue(workMinuteInput.value, 0, 59), 2)
+    workSecondInput.value = padNumber(clampValue(workSecondInput.value, 0, 59), 2)
+    restMinuteInput.value = padNumber(clampValue(restMinuteInput.value, 0, 59), 2)
+    restSecondInput.value = padNumber(clampValue(restSecondInput.value, 0, 59), 2)
+
+    workMinutes = workMinuteInput.value;
+    workSeconds = workSecondInput.value;
+    restMinutes = restMinuteInput.value;
+    restSeconds = restSecondInput.value;
+
+    if (shouldUpdate) {
+      if (isWork) {
+        currentMinutes = parseInt(workMinutes);
+        currentSeconds = parseInt(workSeconds);
+      } else {
+        currentMinutes = parseInt(restMinutes);
+        currentSeconds = parseInt(restSeconds);
+      }
+      updateClock(currentMinutes, currentSeconds)
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+<script>
+
+  var currentX;
+  var currentY;
+  var selectedSticky;
+  var active;
+  var crumples = 0;
+  var possibleCrumples = [document.getElementById("crumple1"), document.getElementById("crumple2"), document.getElementById("crumple3")]
+  
+  function hover(element) {
+    element.setAttribute('src', 'assets/images/sticky-active.png');
+  }
+
+  function unhover(element) {
+    element.setAttribute('src', 'assets/images/stickies.png');
+  }
+
+  var body = document.getElementById("body")
+
+  body.addEventListener("mousedown", startDrag, false);
+  body.addEventListener("mouseup", endDrag, false);
+  body.addEventListener("mousemove", continueDrag, false);
+
+  function startDrag(event) {
+
+    selectedSticky = event.target;
+  
+    if (!selectedSticky.classList.contains("sticky-note")) {
+      return;
+    }
+
+    if (!selectedSticky.xOffset) {
+      selectedSticky.xOffset = 0;
+      selectedSticky.yOffset = 0;
+    }
+    selectedSticky.initialX = event.clientX - selectedSticky.xOffset;
+    selectedSticky.initialY = event.clientY - selectedSticky.yOffset;
+
+    active = true;
+  }
+
+  function show(id){
+    document.getElementById(id).classList.add("show")
+  }
+
+  function hide(id){
+    document.getElementById(id).classList.remove("show")
+  }
+
+  function showGlow(id) {
+    document.getElementById(id).classList.remove("hidden")
+  }
+
+  function hideGlow(id) {
+    document.getElementById(id).classList.add("hidden")
+  }
+
+  function continueDrag(event) {
+    if (active) {
+      let currentX = event.clientX - selectedSticky.initialX;
+      let currentY = event.clientY - selectedSticky.initialY;
+
+      let rect = selectedSticky.getBoundingClientRect();
+      let areaRect = stickyArea.getBoundingClientRect();
+      let trashcan = document.getElementById("trashcan");
+      let trashRect = trashcan.getBoundingClientRect();
+
+      if(event.clientX > trashRect.left && event.clientX < trashRect.left + trashRect.width) {
+        if (event.clientY > trashRect.top + trashRect.height/2) {
+          currentY = trashRect.top - selectedSticky.initialY;
+        }
+      } else if (event.clientY > areaRect.top + areaRect.height) {
+        currentY = areaRect.top + areaRect.height - selectedSticky.initialY;
+      }
+
+
+      selectedSticky.xOffset = currentX;
+      selectedSticky.yOffset = currentY;
+
+      setTranslate(currentX, currentY, selectedSticky);
+
+      if (event.clientX > trashRect.left && event.clientX < trashRect.left + trashRect.width && event.clientY > trashRect.top && event.clientY < trashRect.top + trashRect.height) {
+        showGlow('trashglow')
+      } else {
+        hideGlow('trashglow')
+      }
+    }
+  }
+
+  function setTranslate(xPos, yPos, element) {
+    element.style.transform = "translate(" + xPos + "px, " + yPos + "px)";
+  }
+
+  function endDrag(element) {
+    let trashRect = trashcan.getBoundingClientRect();
+    if (active && event.clientX > trashRect.left && event.clientX < trashRect.left + trashRect.width && event.clientY > trashRect.top && event.clientY < trashRect.top + trashRect.height) {
+      throwAway(selectedSticky);
+      let trashglow = document.getElementById("trashglow")
+      trashglow.classList.add('hidden')
+    }
+    active = false;
+  }
+  
+  function createSticky(element) {
+    let newSticky = document.getElementById("sticky").cloneNode(true);
+    newSticky.classList.remove("hidden");
+    document.getElementById("stickyArea").appendChild(newSticky);
+    newSticky.style.left = (Math.random() * 90) + "%";
+    newSticky.style.top = (Math.random() * 37.5) + "%";
+  }
+
+  function throwAway(sticky) {
+    document.getElementById("stickyArea").removeChild(sticky);
+    if (crumples > 40) {
+      return;
+    }
+    let randNum = Math.floor(Math.random() * 3)
+    let newCrumple = possibleCrumples[randNum].cloneNode(true);
+    newCrumple.classList.remove("hidden");
+    newCrumple.style.left = (76.3 - crumples/40) + ((7 + crumples/30) * Math.random()) + "%";
+    if (crumples < 5) {
+      newCrumple.style.top = 82 + "%";
+    } else {
+      newCrumple.style.top = (82 - (Math.random()/2 + 0.5) * (crumples/2.5)) + "%";
+    }
+    newCrumple.style.transform = "rotate(" + Math.random() * 360 + ")";
+    newCrumple.style.height = 5 + 3 * Math.random() + "%";
+    document.getElementById("crumpleArea").appendChild(newCrumple)
+    crumples += 1
+  }
+</script>

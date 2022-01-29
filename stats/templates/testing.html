@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<h1>3.5 Testing!</h1>
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<span style="font-size: 150%" class="beginning-text">Here are the 20 words again! Shuffled, of course.</span>
+<br>
+<span style="font-size: 125%">Please write down as many definitions as you can remember! Don't worry if some are wrong, points will not be taken off. JUST DON'T LOOK UP DEFINITIONS!!!</span>
+{% endblock %}
+
+{% block subtitle %}
+<br>
+<br>
+  <div id="words" style="align-items: left;">
+    <form action="{{ link }}" method="post">
+      {% for word in words %}
+      <div class="form-group">
+        <label for="{{ word }}">{{ word }}</label>
+        <input type="text" class="form-control" id="{{ word }}" name = "{{ word }}">
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Submit!</button>
+    </form
+  </div>
+  <br>
+  <br>
+{% endblock %}
+
+{% block main2 %}
+{% endblock %}

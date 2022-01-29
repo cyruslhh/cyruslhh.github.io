@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<h1 class="beginning-text"> Welcome to my stats experiment!</h1>
+<h1 class="secondary-text"> 1. Contact information  </h1>
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<span style="font-size: 150%" class="beginning-text">The goal of this experiment is to see if concordia students are better at retaining information and learning when
+they are taught using <b>visual</b> or <b>audio</b> methods. The task is simple, and will take roughly 10 minutes. Click the button below
+to start and get a treat PLUS your place in a raffle for a 50 yuan Starbucks gift card!</span>
+<span style="font-size: 150%" class="secondary-text ">First, put your name and email down! I'll use this email for sending the gift card, so please use your school email.</span>
+{% endblock %}
+
+{% block subtitle %}
+<button type="button" id="startButton" class="btn btn-primary btn-lg beginning-text" style="margin-top: 2rem">Start Now!</button>
+<span id="audio-warning" style="color: red">WARNING! YOUR BROWSER DOES NOT SUPPORT TEXT TO SPEECH. PLEASE USE THE LATEST VERSION OF CHROME OR SAFARI INSTEAD. </span>
+<div class="secondary-text" style="margin-top: 2rem">
+  <form action="/stats/start" method="POST">
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">Use your school email!</small>
+    </div>
+    <div class="form-group">
+      <label for="inputCode">Referral Code (if you have one)</label>
+      <input type="text" class="form-control" id="inputCode" name="inputCode" aria-describedby="codeHelp" placeholder="Enter a code!">
+      <small id="codeHelp" class="form-text text-muted">By using this code, you and your referral get an extra spot in the raffle!</small>
+    </div>
+    <button type="submit" id="formButton" class="btn btn-primary" style="margin-top: 2rem">Submit</button>
+    <span id="error" style="color: red; visibility: hidden">error!</span>
+  </form>
+</div>
+<script>
+  $(".secondary-text").hide()
+  $("#audio-warning").hide()
+  if (!('speechSynthesis' in window)) {
+    $("#audio-warning").show()
+  }
+  $("#startButton").click(function() {
+    $(".beginning-text").fadeOut(300, function() {
+      $(this).remove();
+      $(".secondary-text").fadeIn(300)})
+  })
+</script>
+{% endblock %}
+
+{% block main2 %}
+<br>
+<br>
+<span style="font-size: 125%" class="beginning-text">All you need is this computer and some Wi-Fi!</span>
+<br>
+<br>
+<!-- <h4 class="beginning-text">As ___ people have completed the experiment, your chance of getting the gift card is currently: _____!</h4> -->
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<h1>3. Visual memorizing technique</h1>
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<span style="font-size: 150%" class="beginning-text">You'll be presented with 20 random words</span>
+<br>
+<span style="font-size: 125%">Next to the words are their definitions. You have 5 MINUTES, as indicated by the timer below, to study the definitions.
+   Try to remember as many as you can, but you DO NOT need to memorize every single one! <br>DO NOT COPY DOWN OR LOOK UP ANY DEFINITIONS!</br></span>
+{% endblock %}
+
+{% block subtitle %}
+<br>
+<br>
+  <span style="color: red">Once you press this button, the timer will start and the words shown. All words will disappear after the timer runs out! Press the button when you're ready.</span>
+  <br>
+  <br>
+  <span style="color: red; font-size: 66%">DO NOT GO BACK OR RELOAD THE PAGE! IT WILL RESULT IN WORDS DISAPPEARING. If you did go back or reload the page, please go back to the home page!</span>
+  <br>
+  <button type="submit" id="startButton" class="btn btn-primary" style="margin-top: 2rem;">Start!</button>
+  <br>
+  <div id="words" style="align-items: left;">
+    <table class="table table-striped table-hover">
+    {% for pair in word_pairs %}
+      <tr>
+        <th scope="col" style="font-size: 1.5rem"> {{pair["word"]}}</th>
+        <th scope="col" style="font-weight: normal !important; font-size: 1.5rem"> {{pair["def"]}}</th>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
+  <script>
+    let timerStarted = false
+    let startingTimer = 300000
+    $("#words").hide()
+
+    $("#startButton").click(function() {
+      interval = setInterval(updateTimer, 1000)
+      $("#words").show();
+      this.remove()
+    });
+
+    function updateTimer() {
+      console.log("a")
+      startingTimer -= 1000
+      minutes = Math.floor(startingTimer/60000)
+      seconds = Math.floor((startingTimer % 60000)/1000)
+      const zeroPad = (num, places) => String(num).padStart(places, '0')
+      $("#timer").text(minutes + ":" + zeroPad(seconds, 2))
+      if(startingTimer <= 0) {
+        clearInterval(interval)
+        console.log("OVER!!")
+        $("#words").hide();
+        $("#finishedButton").show();
+      }
+    }
+  </script>
+    <span style="font-size: 75%; color: red" id="timer">5:00</span>
+  <br>
+  <br>
+  <br>
+  <br>
+{% endblock %}
+
+{% block main2 %}
+<br>
+<button type="button" onclick="location.href='{{ link }}';" id="finishedButton" class="btn btn-primary btn-lg beginning-text" style="margin-top: 2rem; margin-bottom: 4rem">Next!</button>
+<script> $("#finishedButton").hide(); </script>
+{% endblock %}

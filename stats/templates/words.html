@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<h1>2. List of words</h1>
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<span style="font-size: 150%" class="beginning-text">It's very important for the experiment that you DO NOT KNOW the definition of the words below!</span>
+<br>
+<br>
+<span style="font-size: 125%">Please select all words below that you are 100% sure you know the definition for (DO NOT LOOK THEM UP!), and press the refresh button at the bottom of the page.
+Repeat until you don't know any of the words below!</span>
+{% if used %}
+  <br>
+  <br>
+  <span style="font-size: 75%; color: red">Unfortunately it seems you know too many words and I didn't add enough words in the database to replace your known words! Just carry on as usual, it'll be ok!</span>
+{% endif %}
+{% endblock %}
+
+{% block subtitle %}
+<ul id="navigation" style="text-align: left; list-style-type: none; padding-top: 2rem">
+  <form action="/stats/words" method="POST">
+    <h6> I KNOW THE FOLLOWING WORDS: </h6>
+  {% for word in words %}
+    <div class="form-group">
+      <input type="checkbox" id="{{ word }}" value="{{ word }}" name="{{ word }}"style="padding-right: 1rem">
+      <label for="{{ word }}" style="padding-left: 2rem">{{ word }}</label><br>
+    </div>
+  {% endfor %}
+    <button type="submit" id="submitButton" href="/stats/start" class="btn btn-primary" style="margin-top: 2rem; {% if used %} display: none {% endif %}" disabled>Replace selected words</button>
+    <script>
+
+      $("input[type='checkbox']").change(function() {
+        console.log("check")
+        if(this.checked) {
+          $("#submitButton").prop("disabled", false);
+        } else {
+          var lengthchecked = $("input[type='checkbox']:checked").length;
+          if (lengthchecked == 0) {
+            $("#submitButton").prop("disabled", true);
+          }
+        }
+      $('#textbox1').val(this.checked);
+  });
+    </script>
+  </form>
+</ul>
+{% endblock %}
+
+{% block main2 %}
+<br>
+<button onclick="location.href='/stats/experiment';"type="submit" id="finishedButton" class="btn btn-primary btn-lg beginning-text" style="margin-top: 2rem; margin-bottom: 4rem">I don't know any of these words. Let's start!</button>
+{% endblock %}
