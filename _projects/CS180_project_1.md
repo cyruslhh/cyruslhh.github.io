@@ -106,7 +106,7 @@ The results were promising, and each image took at most 40 seconds to align.
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="/assets/img/CS180/Project_1/large_emir.jpg" title="Emir" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
-            Melons <br>
+            Emir <br>
             r displacement: (103, 55) <br>
             g displacement: (49, 24)
         </div>
