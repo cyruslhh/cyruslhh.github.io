@@ -7,5 +7,8 @@ dropdown: true
 children:
   - title: Project 1
     permalink: /projects/CS180_project_1/
+  - title: divider
+  - title: Project 2
+    permalink: /projects/CS180_project_2/
   # - title: divider
 ---

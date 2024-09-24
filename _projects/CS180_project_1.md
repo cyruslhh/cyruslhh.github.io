@@ -15,7 +15,7 @@ For smaller images, we can use an exhaustive search to try all possible "offsets
 1. Select one image as the reference image. We use the B channel here.
 2. For all other images, perform an exhaustive search in the range -N to +N pixels for the x and y direction. We use N=20 here.
 3. Shift the image by the specified displacement, and use some sort of metric to determine the quality of this alignment. Record the highest score.
-
+d
 We tried three different metrics, with varying runtimes and effectiveness:
 
 <div class="row">
