@@ -50,7 +50,9 @@ As we learned in class, this approximates a partial derivative in the x and y di
     </div>
 </div>
 
-We can improve upon this by combining the derivatives in the x and y directions using a simple L2 formula, providing a better view of the edges of the images. After that, we can easily binarize it by trying out a range of thresholds. Noise that is below this threshold will be eliminated, while values at or above the threshold will be set to 1 to show that we've found an edge.
+We can improve upon this by combining the derivatives in the x and y directions using a simple L2 formula, providing a better view of the edges of the images. After that, we can easily binarize it by trying out a range of thresholds. Noise that is below this threshold will be eliminated, while values at or above the threshold will be set to 1 to show that we've found an edge. The computation for the magnitude is simply:
+
+$$ M = \sqrt{D_x^2 + D_y^2} $$
 
 <div class="row align-items-end">
     <div class="col-sm mt-3 mt-md-0">
@@ -141,9 +143,9 @@ As with before we can binarize this and use a range of thresholds to see which w
     </div>
 </div>
 
-<h3 class="text-center text-decoration-underline my-4">Combining Convolutions</h3>
-
 As we can see here, a threshold of 0.12 pretty much removed all noise from the image and was able to preserve many of the edges within the image. The difference between this edge image from our attempt previously is that it's much smoother - rather than "blocky" straight lines and lots of little dots caused by noise we have continuous looking lines that much better match the contours of the cameraman's body. The smoothing filter essentially smoothed out the detected edges and gave us a much better result than before. 
+
+<h3 class="text-center text-decoration-underline my-4">Combining Convolutions</h3>
 
 In order to make this operation even faster, we can actually combine the 2 separate convolutions - blurring and then the difference operators - into one before applying it to the image.
 
@@ -201,6 +203,8 @@ The resulting partial derivative of Gaussians (DoG) were the same, and putting i
         </div>
     </div>
 </div>
+
+As expected, we get the same results!
 
 ## Task 2.1: Image "Sharpening"
 
@@ -472,7 +476,7 @@ We can also use FFT to see what were the effects of applying a low and high pass
     </div>
 </div>
 
-This image was probably successful due to the greyscale nature of the image and the highly compatible nature of the two images - they are literally aligned already and have the same overall structure.
+We can clearly see that, as a result of the low-pass filter, the Fourier transform of Happy Hank has much of the high frequency details removed - all that's left are low-frequency details as represented by the white horizontal and vertical lines. For Angry Hank, the high-frequency details are way more prevalent. This image was probably successful due to the greyscale nature of the image and the highly compatible nature of the two images - they are literally aligned already and have the same overall structure.
 
 ## Task 2.3: Gaussian and Laplacian Stacks
 
