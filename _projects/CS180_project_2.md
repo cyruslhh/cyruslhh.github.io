@@ -315,13 +315,13 @@ We'll first use the class example - Derek and his cat Nutmeg. We'll take the low
 
 <div class="row align-items-end">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/DerekPicture.png" title="camera man edges 0.2" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/DerekPicture.jpg" title="camera man edges 0.2" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
             Derek
         </div>
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/nutmeg.png" title="camera man edges 0.15" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/nutmeg.jpg" title="camera man edges 0.15" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
             Nutmeg
         </div>
@@ -360,7 +360,7 @@ Let's try some other examples.
         </div>
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/stanford.png" title="camera man edges 0.2" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/stanford.jpg" title="camera man edges 0.2" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
             Hoover Tower
         </div>
