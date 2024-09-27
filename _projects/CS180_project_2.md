@@ -484,7 +484,7 @@ What if we applied the gaussian filter to a image multiple times? Then we get a 
 
 <div class="row align-items-end">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/orple_stack.png" title="camera man edges 0.2" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_2/Orple_stack.png" title="camera man edges 0.2" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
             Orple Gaussian + Laplacian Stack
         </div>
