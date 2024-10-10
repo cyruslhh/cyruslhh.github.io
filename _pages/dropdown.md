@@ -10,5 +10,8 @@ children:
   - title: divider
   - title: Project 2
     permalink: /projects/CS180_project_2/
+  - title: divider
+  - title: Project 3
+    permalink: /projects/CS180_project_3/
   # - title: divider
 ---

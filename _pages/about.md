@@ -9,7 +9,6 @@ profile:
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>1717 Oxford Street</p>
     <p>Berkeley, CA 94709</p>
 
 news: false # includes a list of news items
