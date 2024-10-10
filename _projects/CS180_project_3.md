@@ -2,7 +2,7 @@
 layout: page
 title: CS180 Project 3
 description: Face Morphing and Modelling a Photo Collection
-img: assets/img/CS180/Project_3/smth
+img: assets/img/CS180/Project_3/2_4.png
 importance: 1
 category: work
 related_publications: false
