@@ -59,7 +59,7 @@ Here are the pairs of points that were chosen for the images:
 
 After setting the points, we set up the equation p’=Hp, where p’ is our destination points and p is our source points, and solve for H. In this case, since we have 4 points, there is only one possible H that can satisfy the equation. For mosaics though, we'll choose more points for stability, so we'll make an overdetermined system and use least squares (or SVD) in order to find the best solution.
 
-To solve for H, we'll use the equation we learned in lecture, but sing SVD instead:
+To solve for H, we'll use the equation we learned in lecture, and use SVD to find the least squares solution:
 
 $$
    A = \begin{bmatrix}
