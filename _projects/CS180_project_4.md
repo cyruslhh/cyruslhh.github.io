@@ -158,10 +158,10 @@ First, let's take a couple of pictures:
 
 <div class="row align-items-end">
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/4_1.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/4_2.png" title="camera man" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/4_2.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/4_1.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -171,6 +171,15 @@ First, let's take a couple of pictures:
     </div>
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/5_3.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+<div class="row align-items-end">
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_1.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_2.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -206,11 +215,26 @@ Next, let's label some correspondences between them manually.
     </div>
 </div>
 
+<div class="row align-items-end">
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_3.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+        <div class="caption">
+            Li Ka Shing
+        </div>
+    </div>
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_4.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
+        <div class="caption">
+            Li Ka Shing side view
+        </div>
+    </div>
+</div>
+
 Then, we warp the second image using the homography recovered
 
 <div class="row align-items-end">
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
-        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/5_1.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/5_3.png" title="camera man" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/5_2.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
@@ -223,6 +247,15 @@ Then, we warp the second image using the homography recovered
     </div>
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/4_3.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+<div class="row align-items-end">
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_2.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_5.png" title="camera man x" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -255,6 +288,15 @@ This results in the following images:
     </div>
 </div>
 
+<div class="row align-items-end">
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_6.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+        <div class="caption">
+            Li Ka Shing finished
+        </div>
+    </div>
+</div>
+
 One issue is the strange triangular gray areas in the overlapping region. We can fix this by using a for loop to detect points in the overlapping region where one image is out of bounds. If that's the case, use only the pixel values from the image that isn't out of bounds.
 
 <div class="row align-items-end">
@@ -271,6 +313,15 @@ One issue is the strange triangular gray areas in the overlapping region. We can
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/5_5.png" title="camera man" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
             Balcony improved
+        </div>
+    </div>
+</div>
+
+<div class="row align-items-end">
+    <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
+        {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/7_7.png" title="camera man" class="img-fluid rounded z-depth-1" %}
+        <div class="caption">
+            Li Ka Shing improved
         </div>
     </div>
 </div>
