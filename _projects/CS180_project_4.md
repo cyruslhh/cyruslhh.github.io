@@ -435,13 +435,13 @@ In the end, this was our best list of inliers:
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/8_7.png" title="camera man" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
-            Balcony 1 Matches after RANSACT
+            Balcony 1 Matches after RANSAC
         </div>
     </div>
     <div class="col-sm mt-3 mt-md-0" style="height: 50%;">
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_4/8_8.png" title="camera man" class="img-fluid rounded z-depth-1" %}
         <div class="caption">
-            Balcony 2 Matches after RANSACT
+            Balcony 2 Matches after RANSAC
         </div>
     </div>
 </div>
