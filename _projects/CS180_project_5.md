@@ -2,7 +2,7 @@
 layout: page
 title: CS180 Project 5
 description: Fun Wth Diffusion Models!
-img: assets/img/CS180/Project_5/5_5.png
+img: assets/img/CS180/Project_5/Part_1/results/1.11.3_3.png
 importance: 1
 category: work
 related_publications: false
@@ -1022,4 +1022,4 @@ The accuracy at epoch=20 was pretty amazing - each digit is clearly visible and 
 
 ## Conclusion
 
-Overall, this project was a blast. It's always super satisfying to understand something after being amazed by it for so long. Dall-E has been something I've been playing with since Freshman year and was always wondered how it works, but never bothered to look deeply into. This project gave a great introduction and idea of how things work under the hood, and it's exciting to see what generative models will be able to achieve in the years to come.
+Overall, this project was a blast. It's always super satisfying to understand something after being amazed by it for so long. Dall-E has been something I've been playing with since Freshman year and I've always wondered how it works, but never bothered to look deeply into it. This project gave a great introduction and idea of how things work under the hood, and it's exciting to see what generative models will be able to achieve in the years to come.
