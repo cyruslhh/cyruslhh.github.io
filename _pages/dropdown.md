@@ -19,4 +19,6 @@ children:
   - title: divider
   - title: Project 5
     permalink: /projects/CS180_project_5/
+  - title: Project 6
+    permalink: /projects/CS180_project_6/
 ---
