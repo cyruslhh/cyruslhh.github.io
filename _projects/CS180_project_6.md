@@ -254,6 +254,8 @@ Here are the corresponding PSNR curve comparing with 6 images from the validatio
 
 We can clearly see that it plateaus around 5000 iterations. Let's now sample from the test cameras at different iterations and see how the model evolves, by creating a gif for all the camera angles provided in the test_c2ws:
 
+If the gifs are not working, it's probably because it didn't loop. Reload the page or open the image in a new tab to view it clearly.
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/CS180/Project_6/2.5.3.gif" title="camera man" class="img-fluid rounded z-depth-1" %}
